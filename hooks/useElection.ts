@@ -2,23 +2,9 @@
 
 import useSWR from "swr";
 import type { Proceso, Totales, Participante } from "@/lib/types";
+import { proxyThenDirect } from "@/lib/onpe-client";
 
 export const REFRESH_MS = 30_000;
-
-async function fetcher<T>(url: string): Promise<T> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    let msg = `Error ${res.status}`;
-    try {
-      const body = await res.json();
-      if (body?.error) msg = body.error;
-    } catch {
-      /* ignore */
-    }
-    throw new Error(msg);
-  }
-  return res.json() as Promise<T>;
-}
 
 const swrOpts = {
   refreshInterval: REFRESH_MS,
@@ -39,19 +25,35 @@ export interface ElectionState {
 }
 
 export function useElection(): ElectionState {
-  const proc = useSWR<Proceso>("/api/onpe/proceso", fetcher, swrOpts);
+  const proc = useSWR<Proceso>(
+    "/api/onpe/proceso",
+    () =>
+      proxyThenDirect<Proceso>(
+        "/api/onpe/proceso",
+        "/proceso/proceso-electoral-activo",
+      ),
+    swrOpts,
+  );
 
   const idEleccion = proc.data?.idEleccionPrincipal;
   const key = idEleccion ? `idEleccion=${idEleccion}` : null;
 
   const tot = useSWR<Totales>(
     key ? `/api/onpe/totales?${key}` : null,
-    fetcher,
+    () =>
+      proxyThenDirect<Totales>(
+        `/api/onpe/totales?${key}`,
+        `/resumen-general/totales?${key}&tipoFiltro=eleccion`,
+      ),
     swrOpts,
   );
   const part = useSWR<Participante[]>(
     key ? `/api/onpe/participantes?${key}` : null,
-    fetcher,
+    () =>
+      proxyThenDirect<Participante[]>(
+        `/api/onpe/participantes?${key}`,
+        `/resumen-general/participantes?${key}&tipoFiltro=eleccion`,
+      ),
     swrOpts,
   );
 

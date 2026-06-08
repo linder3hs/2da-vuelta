@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -29,6 +30,11 @@ export default function RootLayout({
       <body>
         <div className="app-backdrop" aria-hidden />
         {children}
+        <Script
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          strategy="afterInteractive"
+          data-cf-beacon='{"token": "03a5f4e877444d7eab3b3d1a9b406ee3"}'
+        />
       </body>
     </html>
   );
