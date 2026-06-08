@@ -20,7 +20,7 @@ export default function ProgressStats({ t }: { t: Totales }) {
             </p>
           </div>
           <div className="text-3xl font-extrabold tabular-nums text-sky-300">
-            {t.actasContabilizadas.toFixed(3)}%
+            {t.actasContabilizadas.toFixed(2)}%
           </div>
         </div>
         <div className="h-3 w-full overflow-hidden rounded-full bg-white/8 ring-1 ring-white/10">
@@ -57,7 +57,7 @@ export default function ProgressStats({ t }: { t: Totales }) {
         <StatCard
           label="Enviadas a JEE"
           value={t.actasEnviadasJee}
-          decimals={3}
+          decimals={2}
           suffix="%"
           sub={`${formatNumber(t.enviadasJee)} actas`}
           accent="#22c55e"
@@ -66,7 +66,7 @@ export default function ProgressStats({ t }: { t: Totales }) {
         <StatCard
           label="Pendientes JEE"
           value={t.actasPendientesJee}
-          decimals={3}
+          decimals={2}
           suffix="%"
           sub={`${formatNumber(t.pendientesJee)} actas`}
           accent="#eab308"
