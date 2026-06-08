@@ -3,14 +3,21 @@ import type { OnpeEnvelope } from "./types";
 export const ONPE_BASE =
   "https://resultadosegundavuelta.onpe.gob.pe/presentacion-backend";
 
+// ONPE no geo-bloquea: su WAF sirve el SPA (HTML) salvo que la petición parezca
+// el XHR legítimo del propio Angular. La clave es `Sec-Fetch-Site: same-origin`
+// (+ Referer al mismo origen). Con esto el fetch server-side funciona desde
+// cualquier IP (incluido Vercel) — no hace falta proxy en Perú.
 const BROWSER_HEADERS: Record<string, string> = {
-  Accept: "application/json, text/plain, */*",
+  Accept: "*/*",
   "Accept-Language": "es-PE,es;q=0.9",
+  "Content-Type": "application/json",
   Referer: "https://resultadosegundavuelta.onpe.gob.pe/main/resumen",
-  Origin: "https://resultadosegundavuelta.onpe.gob.pe",
   "User-Agent":
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
-    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+    "(KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+  "sec-fetch-dest": "empty",
+  "sec-fetch-mode": "cors",
+  "sec-fetch-site": "same-origin",
 };
 
 export class OnpeError extends Error {

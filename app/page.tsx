@@ -37,8 +37,8 @@ export default function Page() {
               <strong className="font-semibold">No se pudieron cargar los datos.</strong>{" "}
               {error.message}
               <span className="block text-amber-200/70">
-                La API de ONPE puede estar geo-restringida a Perú o
-                temporalmente no disponible. Reintentando automáticamente…
+                La API de ONPE puede estar temporalmente no disponible.
+                Reintentando automáticamente…
               </span>
             </div>
           </motion.div>

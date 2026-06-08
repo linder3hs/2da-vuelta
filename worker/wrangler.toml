@@ -1,9 +1,0 @@
-name = "onpe-proxy"
-main = "onpe-proxy.js"
-compatibility_date = "2024-11-01"
-
-# Deploy:  cd worker && npx wrangler deploy
-# Tras el deploy obtienes una URL tipo:
-#   https://onpe-proxy.<tu-subdominio>.workers.dev
-# Úsala (con el sufijo /presentacion-backend) en la env de Vercel:
-#   NEXT_PUBLIC_ONPE_PROXY=https://onpe-proxy.<tu-subdominio>.workers.dev/presentacion-backend
