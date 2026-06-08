@@ -72,3 +72,66 @@ export async function fetchOnpe<T>(path: string): Promise<T> {
 
   return json.data;
 }
+
+// ---------------------------------------------------------------------------
+// Cache server-side compartido + dedupe de peticiones + último-valor-bueno.
+//
+// - TTL: todas las peticiones de clientes a la misma ruta comparten una sola
+//   llamada a ONPE durante `ttlMs` (no martillamos ONPE ni nos arriesgamos a
+//   que nos bloqueen aunque haya muchos usuarios).
+// - Dedupe: si llega otra petición mientras una está en vuelo, espera la misma.
+// - Stale-on-error: si ONPE falla pero ya tenemos un valor bueno, lo servimos
+//   marcándolo como `stale` en vez de mostrar error (clave para Vercel/geo).
+//
+// La memoria de módulo persiste entre peticiones en la misma instancia (Fluid
+// Compute reutiliza instancias), por lo que el cache funciona en producción.
+// ---------------------------------------------------------------------------
+
+interface CacheEntry<T> {
+  data: T;
+  ts: number;
+}
+
+const cache = new Map<string, CacheEntry<unknown>>();
+const inflight = new Map<string, Promise<unknown>>();
+
+export interface CachedResult<T> {
+  data: T;
+  /** true si se devolvió un valor antiguo porque ONPE falló */
+  stale: boolean;
+  /** epoch ms del fetch exitoso que generó este dato */
+  fetchedAt: number;
+}
+
+export async function fetchOnpeCached<T>(
+  path: string,
+  ttlMs = 15_000,
+): Promise<CachedResult<T>> {
+  const hit = cache.get(path) as CacheEntry<T> | undefined;
+  if (hit && Date.now() - hit.ts < ttlMs) {
+    return { data: hit.data, stale: false, fetchedAt: hit.ts };
+  }
+
+  let p = inflight.get(path) as Promise<T> | undefined;
+  if (!p) {
+    p = fetchOnpe<T>(path)
+      .then((data) => {
+        cache.set(path, { data, ts: Date.now() });
+        return data;
+      })
+      .finally(() => inflight.delete(path));
+    inflight.set(path, p);
+  }
+
+  try {
+    const data = await p;
+    const fresh = cache.get(path) as CacheEntry<T> | undefined;
+    return { data, stale: false, fetchedAt: fresh?.ts ?? Date.now() };
+  } catch (e) {
+    if (hit) {
+      // ONPE falló pero tenemos último-valor-bueno: servir stale.
+      return { data: hit.data, stale: true, fetchedAt: hit.ts };
+    }
+    throw e;
+  }
+}
