@@ -1,12 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { Source_Sans_3, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-const poppins = Poppins({
+// Cuerpo: sans editorial, limpio y legible.
+const sans = Source_Sans_3({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans-editorial",
+  display: "swap",
+});
+
+// Titulares: serif de prensa (alto contraste).
+const serif = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["600", "700", "800", "900"],
+  variable: "--font-serif-editorial",
   display: "swap",
 });
 
@@ -26,7 +35,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={poppins.variable}>
+    <html lang="es" className={`${sans.variable} ${serif.variable}`}>
       <body>
         <div className="app-backdrop" aria-hidden />
         {children}

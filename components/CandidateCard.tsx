@@ -47,7 +47,7 @@ export default function CandidateCard({ p, rank, delay = 0 }: Props) {
           size={56}
         />
         <div className="min-w-0">
-          <h3 className="truncate text-lg font-bold leading-tight">
+          <h3 className="truncate font-serif text-xl font-bold leading-tight">
             {shortName(p.nombreCandidato)}
           </h3>
           <p className="truncate text-xs font-medium uppercase tracking-wide text-white/45">
@@ -59,7 +59,7 @@ export default function CandidateCard({ p, rank, delay = 0 }: Props) {
       <div className="mt-5 flex items-end justify-between">
         <div>
           <div
-            className="text-4xl font-extrabold tabular-nums"
+            className="figure text-5xl font-black"
             style={{ color: s.color }}
           >
             <AnimatedNumber value={p.porcentajeVotosValidos} decimals={2} suffix="%" />

@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans-editorial), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif-editorial), ui-serif, Georgia, serif;
 
   --color-bg: #0a0f1a;
   --color-bg-soft: #0f1626;
@@ -65,6 +66,51 @@ body {
 
 .text-gradient {
   color: var(--color-ink);
+}
+
+/* ---- Utilidades editoriales / periodísticas ---- */
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Antetítulo (kicker / eyebrow) */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Filete fino tipo prensa */
+.rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.04)
+  );
+}
+
+/* Encabezado de sección con antetítulo + filete */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.section-head .rule {
+  flex: 1;
+}
+
+/* Números tabulares de prensa */
+.figure {
+  font-family: var(--font-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
 /* Thin scrollbar */

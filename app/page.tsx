@@ -48,31 +48,51 @@ export default function Page() {
       {isLoading && !hasData ? (
         <SkeletonDashboard />
       ) : hasData ? (
-        <div className="mt-8 space-y-8">
+        <div className="mt-8 space-y-10">
           {/* Head to head — foco principal */}
-          <GlassCard
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="p-6 sm:p-8"
-          >
-            <HeadToHead participantes={participantes!} />
-          </GlassCard>
+          <section>
+            <div className="section-head">
+              <span className="eyebrow">El escrutinio</span>
+              <span className="rule" />
+            </div>
+            <GlassCard
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="p-6 sm:p-8"
+            >
+              <HeadToHead participantes={participantes!} />
+            </GlassCard>
+          </section>
 
           {/* Tarjetas por candidato */}
-          <div className="grid gap-5 md:grid-cols-2">
-            {participantes!.map((p, i) => (
-              <CandidateCard
-                key={p.codigoAgrupacionPolitica}
-                p={p}
-                rank={i}
-                delay={0.1 + i * 0.08}
-              />
-            ))}
-          </div>
+          <section>
+            <div className="section-head">
+              <span className="eyebrow">Los candidatos</span>
+              <span className="rule" />
+            </div>
+            <div className="grid gap-5 md:grid-cols-2">
+              {participantes!.map((p, i) => (
+                <CandidateCard
+                  key={p.codigoAgrupacionPolitica}
+                  p={p}
+                  rank={i}
+                  delay={0.1 + i * 0.08}
+                />
+              ))}
+            </div>
+          </section>
 
           {/* Avance de actas + KPIs */}
-          {totales && <ProgressStats t={totales} />}
+          {totales && (
+            <section>
+              <div className="section-head">
+                <span className="eyebrow">Avance del conteo</span>
+                <span className="rule" />
+              </div>
+              <ProgressStats t={totales} />
+            </section>
+          )}
         </div>
       ) : null}
 

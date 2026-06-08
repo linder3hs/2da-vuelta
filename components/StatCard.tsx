@@ -40,7 +40,7 @@ export default function StatCard({
           {label}
         </span>
       </div>
-      <div className="mt-3 text-2xl font-extrabold tabular-nums sm:text-3xl">
+      <div className="figure mt-3 text-2xl font-black sm:text-3xl">
         <AnimatedNumber
           value={value}
           decimals={decimals}

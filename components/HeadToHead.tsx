@@ -27,23 +27,30 @@ export default function HeadToHead({ participantes }: Props) {
         <Label p={b} color={sb.color} gradient={sb.gradient} align="right" />
       </div>
 
-      <div className="relative flex h-9 w-full overflow-hidden rounded-full ring-1 ring-white/10">
-        <motion.div
-          className="h-full"
-          style={{ background: sa.gradient }}
-          initial={{ width: "50%" }}
-          animate={{ width: `${a.porcentajeVotosValidos}%` }}
-          transition={{ type: "spring", stiffness: 80, damping: 18 }}
-        />
-        <motion.div
-          className="h-full flex-1"
-          style={{ background: sb.gradient }}
-          transition={{ type: "spring", stiffness: 80, damping: 18 }}
-        />
-        <div className="pointer-events-none absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-white/40" />
+      <div className="relative">
+        <div className="relative flex h-10 w-full overflow-hidden rounded-sm ring-1 ring-white/15">
+          <motion.div
+            className="h-full"
+            style={{ background: sa.gradient }}
+            initial={{ width: "50%" }}
+            animate={{ width: `${a.porcentajeVotosValidos}%` }}
+            transition={{ type: "spring", stiffness: 80, damping: 18 }}
+          />
+          <motion.div
+            className="h-full flex-1"
+            style={{ background: sb.gradient }}
+            transition={{ type: "spring", stiffness: 80, damping: 18 }}
+          />
+          {/* Línea de mayoría (50%) */}
+          <div className="pointer-events-none absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-white/85" />
+        </div>
+        {/* Etiqueta de mayoría */}
+        <div className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2">
+          <span className="eyebrow text-[10px] text-white/45">Mayoría · 50%</span>
+        </div>
       </div>
 
-      <div className="mt-4 flex flex-col items-center gap-2">
+      <div className="mt-8 flex flex-col items-center gap-2">
         <div
           className="flex items-baseline gap-2 rounded-2xl px-4 py-2 ring-1"
           style={{
@@ -97,12 +104,12 @@ function Label({
       />
       <div>
         <div
-          className="text-2xl font-extrabold tabular-nums sm:text-3xl"
+          className="figure text-3xl font-black sm:text-4xl"
           style={{ color }}
         >
           {p.porcentajeVotosValidos.toFixed(2)}%
         </div>
-        <div className="text-xs font-medium text-white/70">
+        <div className="font-serif text-sm font-bold text-white/85">
           {shortName(p.nombreCandidato)}
         </div>
         <div className="text-[10px] uppercase tracking-wide text-white/40">

@@ -19,7 +19,7 @@ export default function ProgressStats({ t }: { t: Totales }) {
               {formatNumber(t.contabilizadas)} de {formatNumber(t.totalActas)} actas
             </p>
           </div>
-          <div className="text-3xl font-extrabold tabular-nums text-sky-300">
+          <div className="figure text-4xl font-black text-sky-300">
             {t.actasContabilizadas.toFixed(2)}%
           </div>
         </div>
