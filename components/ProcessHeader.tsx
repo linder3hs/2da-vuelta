@@ -1,24 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { Proceso, Totales } from "@/lib/types";
-import { titleCase, formatDateTime } from "@/lib/format";
+import type { Totales } from "@/lib/types";
+import { formatDateTime } from "@/lib/format";
 import LiveBadge from "./LiveBadge";
 import RefreshCountdown from "./RefreshCountdown";
 
 interface Props {
-  proceso?: Proceso;
   totales?: Totales;
   live: boolean;
   onRefresh: () => void;
 }
 
-export default function ProcessHeader({
-  proceso,
-  totales,
-  live,
-  onRefresh,
-}: Props) {
+export default function ProcessHeader({ totales, live, onRefresh }: Props) {
   return (
     <motion.header
       initial={{ opacity: 0, y: -10 }}
@@ -27,14 +21,14 @@ export default function ProcessHeader({
     >
       {/* Antetítulo / kicker */}
       <div className="mb-3 flex items-center gap-3">
-        <span className="eyebrow">Elecciones Presidenciales · Perú 2026</span>
+        <span className="eyebrow">Perú 2026 · Resultados oficiales ONPE</span>
         <span className="h-px flex-1 bg-white/10" />
         <LiveBadge live={live} />
       </div>
 
       {/* Titular serif */}
       <h1 className="font-serif text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl">
-        {proceso ? titleCase(proceso.nombre) : "Segunda Vuelta 2026"}
+        2da Vuelta de Elecciones Presidenciales 2026
       </h1>
 
       {/* Línea de crédito / dateline */}

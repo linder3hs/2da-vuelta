@@ -5,24 +5,18 @@ import { useElection } from "@/hooks/useElection";
 import ProcessHeader from "@/components/ProcessHeader";
 import HeadToHead from "@/components/HeadToHead";
 import CandidateCard from "@/components/CandidateCard";
-import ProgressStats from "@/components/ProgressStats";
+import ProgressStats, { CountProgress } from "@/components/ProgressStats";
 import GlassCard from "@/components/GlassCard";
 
 export default function Page() {
-  const { proceso, totales, participantes, error, isLoading, refresh } =
-    useElection();
+  const { totales, participantes, error, isLoading, refresh } = useElection();
 
   const hasData = !!(totales && participantes && participantes.length >= 2);
   const live = !error && hasData;
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-      <ProcessHeader
-        proceso={proceso}
-        totales={totales}
-        live={live}
-        onRefresh={refresh}
-      />
+      <ProcessHeader totales={totales} live={live} onRefresh={refresh} />
 
       {/* Banner de error / API no disponible */}
       <AnimatePresence>
@@ -49,6 +43,17 @@ export default function Page() {
         <SkeletonDashboard />
       ) : hasData ? (
         <div className="mt-8 space-y-10">
+          {/* Avance del conteo — al inicio */}
+          {totales && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45 }}
+            >
+              <CountProgress t={totales} />
+            </motion.div>
+          )}
+
           {/* Head to head — foco principal */}
           <section>
             <div className="section-head">
@@ -83,11 +88,11 @@ export default function Page() {
             </div>
           </section>
 
-          {/* Avance de actas + KPIs */}
+          {/* Indicadores secundarios */}
           {totales && (
             <section>
               <div className="section-head">
-                <span className="eyebrow">Avance del conteo</span>
+                <span className="eyebrow">Indicadores</span>
                 <span className="rule" />
               </div>
               <ProgressStats t={totales} />
