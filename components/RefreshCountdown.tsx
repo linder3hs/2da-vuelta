@@ -58,8 +58,8 @@ export default function RefreshCountdown({ onRefresh, isValidating }: Props) {
           />
           <defs>
             <linearGradient id="cd-grad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#e11d48" />
-              <stop offset="100%" stopColor="#f97316" />
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#1e40af" />
             </linearGradient>
           </defs>
         </svg>

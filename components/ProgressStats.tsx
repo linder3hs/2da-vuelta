@@ -19,7 +19,7 @@ export default function ProgressStats({ t }: { t: Totales }) {
               {formatNumber(t.contabilizadas)} de {formatNumber(t.totalActas)} actas
             </p>
           </div>
-          <div className="text-3xl font-extrabold tabular-nums text-gradient">
+          <div className="text-3xl font-extrabold tabular-nums text-sky-300">
             {t.actasContabilizadas.toFixed(3)}%
           </div>
         </div>
@@ -27,7 +27,7 @@ export default function ProgressStats({ t }: { t: Totales }) {
           <motion.div
             className="h-full rounded-full"
             style={{
-              background: "linear-gradient(90deg,#e11d48,#f97316)",
+              background: "linear-gradient(90deg,#3b82f6,#1e40af)",
             }}
             initial={{ width: 0 }}
             animate={{ width: `${Math.max(t.actasContabilizadas, 0.4)}%` }}
