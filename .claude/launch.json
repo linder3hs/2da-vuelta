@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev-mock",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "ONPE_MOCK=1 npm run dev"],
+      "port": 3000
+    }
+  ]
+}

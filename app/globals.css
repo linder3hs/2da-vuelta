@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: #070b14;
+  --color-bg-soft: #0d1322;
+  --color-ink: #f4f6fb;
+  --color-muted: #9aa7c2;
+
+  --color-brand: #e11d48;
+  --color-brand-2: #f97316;
+  --color-accent: #38bdf8;
+
+  /* Party colors */
+  --color-fp: #f97316; /* Fuerza Popular - naranja */
+  --color-jp: #dc2626; /* Juntos por el Perú - rojo */
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Animated gradient backdrop */
+.app-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 50% at 15% 10%, rgba(225, 29, 72, 0.18), transparent 60%),
+    radial-gradient(55% 45% at 85% 0%, rgba(56, 189, 248, 0.16), transparent 55%),
+    radial-gradient(50% 50% at 50% 100%, rgba(249, 115, 22, 0.14), transparent 60%),
+    var(--color-bg);
+}
+
+.app-backdrop::before,
+.app-backdrop::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  animation: float 16s ease-in-out infinite;
+}
+
+.app-backdrop::before {
+  width: 38rem;
+  height: 38rem;
+  top: -10rem;
+  left: -8rem;
+  background: rgba(225, 29, 72, 0.35);
+}
+
+.app-backdrop::after {
+  width: 32rem;
+  height: 32rem;
+  bottom: -12rem;
+  right: -6rem;
+  background: rgba(56, 189, 248, 0.3);
+  animation-delay: -6s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(2rem, -1.5rem) scale(1.08); }
+}
+
+/* Glassmorphism */
+.glass {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-brand), var(--color-brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Thin scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
