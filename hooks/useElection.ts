@@ -11,6 +11,10 @@ const swrOpts = {
   revalidateOnFocus: true,
   keepPreviousData: true,
   dedupingInterval: 5_000,
+  // Evita el flood de reintentos en consola cuando la fuente falla (geo/CORS).
+  // El refreshInterval seguirá reintentando cada 30s de forma controlada.
+  errorRetryCount: 2,
+  errorRetryInterval: 8_000,
 };
 
 export interface ElectionState {
