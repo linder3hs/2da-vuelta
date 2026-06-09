@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import type { Totales } from "@/lib/types";
-import { formatDateTime } from "@/lib/format";
+import { formatDateTime, relativeTime } from "@/lib/format";
 import LiveBadge from "./LiveBadge";
 import RefreshCountdown from "./RefreshCountdown";
 import ThemeToggle from "./ThemeToggle";
@@ -14,6 +15,12 @@ interface Props {
 }
 
 export default function ProcessHeader({ totales, live, onRefresh }: Props) {
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => {
+    setNow(Date.now());
+    const t = setInterval(() => setNow(Date.now()), 15_000);
+    return () => clearInterval(t);
+  }, []);
   return (
     <motion.header
       initial={{ opacity: 0, y: -10 }}
@@ -44,6 +51,12 @@ export default function ProcessHeader({ totales, live, onRefresh }: Props) {
               <span className="font-semibold text-ink/80">
                 {formatDateTime(totales.fechaActualizacion)}
               </span>
+              {now !== null && (
+                <span className="text-ink/45">
+                  {" "}
+                  ({relativeTime(totales.fechaActualizacion, now)})
+                </span>
+              )}
             </>
           )}
         </p>

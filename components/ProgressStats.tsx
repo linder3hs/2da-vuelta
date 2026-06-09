@@ -3,74 +3,76 @@
 import { motion } from "framer-motion";
 import type { Totales } from "@/lib/types";
 import { formatNumber } from "@/lib/format";
-import StatCard from "./StatCard";
 
-/** Barra de avance del conteo de actas (va al inicio). */
-export function CountProgress({ t }: { t: Totales }) {
+/** Tira compacta de avance del conteo (una línea + barra fina). */
+export function CompactProgress({ t }: { t: Totales }) {
   return (
-    <div className="glass rounded-3xl p-6">
-      <div className="mb-2 flex items-end justify-between gap-4">
-        <div>
-          <h2 className="eyebrow">Avance del conteo · Actas contabilizadas</h2>
-          <p className="mt-1 text-xs text-ink/45">
-            {formatNumber(t.contabilizadas)} de {formatNumber(t.totalActas)} actas
-          </p>
-        </div>
-        <div className="figure text-4xl font-black text-blue-500 sm:text-5xl">
-          {t.actasContabilizadas.toFixed(2)}%
-        </div>
+    <div className="glass rounded-2xl px-5 py-4">
+      <div className="flex items-baseline justify-between gap-3">
+        <span className="eyebrow">Avance del conteo</span>
+        <span className="text-xs text-ink/45">
+          {formatNumber(t.contabilizadas)} / {formatNumber(t.totalActas)} actas
+        </span>
       </div>
-      <div className="h-3 w-full overflow-hidden rounded-full bg-ink/8 ring-1 ring-ink/10">
-        <motion.div
-          className="h-full rounded-full"
-          style={{ background: "linear-gradient(90deg,#3b82f6,#1e40af)" }}
-          initial={{ width: 0 }}
-          animate={{ width: `${Math.max(t.actasContabilizadas, 0.4)}%` }}
-          transition={{ type: "spring", stiffness: 70, damping: 18 }}
-        />
+      <div className="mt-2 flex items-center gap-3">
+        <div className="h-2 flex-1 overflow-hidden rounded-full bg-ink/8 ring-1 ring-ink/10">
+          <motion.div
+            className="h-full rounded-full"
+            style={{ background: "linear-gradient(90deg,#3b82f6,#1e40af)" }}
+            initial={{ width: 0 }}
+            animate={{ width: `${Math.max(t.actasContabilizadas, 0.4)}%` }}
+            transition={{ type: "spring", stiffness: 70, damping: 18 }}
+          />
+        </div>
+        <span className="figure shrink-0 text-xl font-black text-blue-500 tabular-nums">
+          {t.actasContabilizadas.toFixed(2)}%
+        </span>
       </div>
     </div>
   );
 }
 
-/** Indicadores secundarios (participación, votos, JEE). */
-export default function ProgressStats({ t }: { t: Totales }) {
+/** Indicadores en fila con filetes (estilo prensa). */
+export default function Indicators({ t }: { t: Totales }) {
+  const items = [
+    {
+      label: "Participación",
+      value: `${t.participacionCiudadana.toFixed(2)}%`,
+      sub: "ciudadana",
+    },
+    {
+      label: "Votos emitidos",
+      value: formatNumber(t.totalVotosEmitidos),
+      sub: `${formatNumber(t.totalVotosValidos)} válidos`,
+    },
+    {
+      label: "Actas enviadas a JEE",
+      value: `${t.actasEnviadasJee.toFixed(2)}%`,
+      sub: `${formatNumber(t.enviadasJee)} actas`,
+    },
+    {
+      label: "Actas pendientes JEE",
+      value: `${t.actasPendientesJee.toFixed(2)}%`,
+      sub: `${formatNumber(t.pendientesJee)} actas`,
+    },
+  ];
+
   return (
-    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-      <StatCard
-        label="Participación"
-        value={t.participacionCiudadana}
-        decimals={2}
-        suffix="%"
-        accent="#38bdf8"
-        delay={0.05}
-      />
-      <StatCard
-        label="Votos emitidos"
-        value={t.totalVotosEmitidos}
-        group
-        sub={`${formatNumber(t.totalVotosValidos)} válidos`}
-        accent="#a855f7"
-        delay={0.1}
-      />
-      <StatCard
-        label="Enviadas a JEE"
-        value={t.actasEnviadasJee}
-        decimals={2}
-        suffix="%"
-        sub={`${formatNumber(t.enviadasJee)} actas`}
-        accent="#22c55e"
-        delay={0.15}
-      />
-      <StatCard
-        label="Pendientes JEE"
-        value={t.actasPendientesJee}
-        decimals={2}
-        suffix="%"
-        sub={`${formatNumber(t.pendientesJee)} actas`}
-        accent="#eab308"
-        delay={0.2}
-      />
+    <div className="glass grid grid-cols-2 rounded-2xl lg:grid-cols-4">
+      {items.map((it, i) => (
+        <div
+          key={it.label}
+          className={`p-5 ${i % 2 === 1 ? "border-l border-ink/8" : ""} ${
+            i >= 2 ? "border-t border-ink/8" : ""
+          } lg:border-t-0 ${i > 0 ? "lg:border-l lg:border-ink/8" : ""}`}
+        >
+          <div className="eyebrow text-[10px]">{it.label}</div>
+          <div className="figure mt-2 text-2xl font-black tabular-nums">
+            {it.value}
+          </div>
+          <div className="mt-0.5 text-xs text-ink/45">{it.sub}</div>
+        </div>
+      ))}
     </div>
   );
 }

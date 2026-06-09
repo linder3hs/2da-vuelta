@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function LiveBadge({ live = true }: { live?: boolean }) {
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${
+      className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${
         live
           ? "bg-rose-500/10 text-rose-600 ring-1 ring-rose-500/30"
           : "bg-ink/5 text-ink/50 ring-1 ring-ink/10"

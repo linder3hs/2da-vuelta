@@ -3,10 +3,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useElection } from "@/hooks/useElection";
 import ProcessHeader from "@/components/ProcessHeader";
-import HeadToHead from "@/components/HeadToHead";
-import CandidateCard from "@/components/CandidateCard";
-import ProgressStats, { CountProgress } from "@/components/ProgressStats";
-import GlassCard from "@/components/GlassCard";
+import ResultHero from "@/components/ResultHero";
+import ResultsTable from "@/components/ResultsTable";
+import Indicators, { CompactProgress } from "@/components/ProgressStats";
 
 export default function Page() {
   const { totales, participantes, error, isLoading, refresh } = useElection();
@@ -15,7 +14,7 @@ export default function Page() {
   const live = !error && hasData;
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+    <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <ProcessHeader totales={totales} live={live} onRefresh={refresh} />
 
       {/* Banner de error / API no disponible */}
@@ -42,68 +41,54 @@ export default function Page() {
       {isLoading && !hasData ? (
         <SkeletonDashboard />
       ) : hasData ? (
-        <div className="mt-8 space-y-10">
-          {/* Avance del conteo — al inicio */}
+        <div className="mt-8 space-y-8">
+          {/* 1. Resultado — la noticia, primero */}
+          <motion.section
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <ResultHero p={participantes!} />
+          </motion.section>
+
+          {/* 2. Avance compacto */}
           {totales && (
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
             >
-              <CountProgress t={totales} />
+              <CompactProgress t={totales} />
             </motion.div>
           )}
 
-          {/* Head to head — foco principal */}
+          {/* 3. Tabla de resultados */}
           <section>
             <div className="section-head">
-              <span className="eyebrow">El escrutinio</span>
+              <span className="eyebrow">Resultados detallados</span>
               <span className="rule" />
             </div>
-            <GlassCard
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="p-6 sm:p-8"
-            >
-              <HeadToHead participantes={participantes!} />
-            </GlassCard>
+            <ResultsTable p={participantes!} />
           </section>
 
-          {/* Tarjetas por candidato */}
-          <section>
-            <div className="section-head">
-              <span className="eyebrow">Los candidatos</span>
-              <span className="rule" />
-            </div>
-            <div className="grid gap-5 md:grid-cols-2">
-              {participantes!.map((p, i) => (
-                <CandidateCard
-                  key={p.codigoAgrupacionPolitica}
-                  p={p}
-                  rank={i}
-                  delay={0.1 + i * 0.08}
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* Indicadores secundarios */}
+          {/* 4. Indicadores */}
           {totales && (
             <section>
               <div className="section-head">
                 <span className="eyebrow">Indicadores</span>
                 <span className="rule" />
               </div>
-              <ProgressStats t={totales} />
+              <Indicators t={totales} />
             </section>
           )}
         </div>
       ) : null}
 
-      <footer className="mt-12 text-center text-xs text-ink/30">
-        Datos oficiales de la ONPE · Proyecto independiente sin afiliación. Los
-        resultados son preliminares hasta el cómputo final.
+      <footer className="mt-12 border-t border-ink/8 pt-5 text-center text-xs text-ink/40">
+        Datos oficiales de la{" "}
+        <span className="font-semibold text-ink/60">ONPE</span> · Proyecto
+        independiente sin afiliación política. Resultados preliminares hasta el
+        cómputo final.
       </footer>
     </main>
   );
@@ -112,16 +97,10 @@ export default function Page() {
 function SkeletonDashboard() {
   return (
     <div className="mt-8 space-y-8">
-      <div className="glass h-40 animate-pulse rounded-3xl" />
-      <div className="grid gap-5 md:grid-cols-2">
-        <div className="glass h-56 animate-pulse rounded-3xl" />
-        <div className="glass h-56 animate-pulse rounded-3xl" />
-      </div>
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="glass h-28 animate-pulse rounded-2xl" />
-        ))}
-      </div>
+      <div className="glass h-56 animate-pulse rounded-3xl" />
+      <div className="glass h-16 animate-pulse rounded-2xl" />
+      <div className="glass h-32 animate-pulse rounded-2xl" />
+      <div className="glass h-28 animate-pulse rounded-2xl" />
     </div>
   );
 }

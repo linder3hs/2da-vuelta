@@ -71,7 +71,7 @@ export default function RefreshCountdown({ onRefresh, isValidating }: Props) {
           {left}
         </span>
       </span>
-      <span className="hidden sm:inline">
+      <span className="whitespace-nowrap">
         {isValidating ? "Actualizando…" : `Actualiza en ${left}s`}
       </span>
     </button>
