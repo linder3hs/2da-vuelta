@@ -46,18 +46,32 @@ export default function ResultHero({ p }: { p: Participante[] }) {
         </div>
       </div>
 
-      {/* Ventaja — una sola línea */}
-      <p className="mt-8 text-center text-sm text-ink/60">
-        Ventaja de{" "}
-        <span className="font-semibold text-ink/90">
-          {shortName(a.nombreCandidato)}
-        </span>{" "}
-        ·{" "}
-        <span className="font-bold" style={{ color: sa.color }}>
-          +{lead.toFixed(2)} pts
-        </span>{" "}
-        · {formatNumber(diff)} votos
-      </p>
+      {/* Diferencia — destacada */}
+      <div className="mt-9 flex flex-col items-center">
+        <span className="eyebrow text-[10px] text-ink/45">
+          Diferencia de votos
+        </span>
+        <motion.span
+          key={diff}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+          className="figure mt-1 text-5xl font-black leading-none sm:text-6xl"
+          style={{ color: sa.color }}
+        >
+          {formatNumber(diff)}
+        </motion.span>
+        <span className="mt-2 text-sm text-ink/60">
+          a favor de{" "}
+          <span className="font-semibold text-ink/90">
+            {shortName(a.nombreCandidato)}
+          </span>{" "}
+          ·{" "}
+          <span className="font-bold" style={{ color: sa.color }}>
+            +{lead.toFixed(2)} pts
+          </span>
+        </span>
+      </div>
     </div>
   );
 }

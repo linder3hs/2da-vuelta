@@ -42,25 +42,25 @@ export default function Page() {
         <SkeletonDashboard />
       ) : hasData ? (
         <div className="mt-8 space-y-8">
-          {/* 1. Resultado — la noticia, primero */}
-          <motion.section
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <ResultHero p={participantes!} />
-          </motion.section>
-
-          {/* 2. Avance compacto */}
+          {/* 1. Avance del conteo — dato clave, antes del resultado */}
           {totales && (
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05 }}
+              transition={{ duration: 0.4 }}
             >
               <CompactProgress t={totales} />
             </motion.div>
           )}
+
+          {/* 2. Resultado — la noticia */}
+          <motion.section
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+          >
+            <ResultHero p={participantes!} />
+          </motion.section>
 
           {/* 3. Tabla de resultados */}
           <section>

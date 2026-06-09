@@ -1,20 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Source_Sans_3, Playfair_Display } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-// Cuerpo: sans editorial, limpio y legible.
-const sans = Source_Sans_3({
+// Cuerpo / UI: grotesca limpia y neutra.
+const sans = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans-editorial",
   display: "swap",
 });
 
-// Titulares: serif de prensa (alto contraste).
-const serif = Playfair_Display({
+// Titulares y cifras: serif editorial con carácter (alto contraste).
+const serif = Fraunces({
   subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "900"],
+  style: ["normal", "italic"],
   variable: "--font-serif-editorial",
   display: "swap",
 });
