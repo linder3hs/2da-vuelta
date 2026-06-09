@@ -34,7 +34,7 @@ export default function CandidateCard({ p, rank, delay = 0 }: Props) {
         style={{ background: s.gradient }}
       />
       {leader && (
-        <span className="absolute right-4 top-4 rounded-full bg-slate-900/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-900/80 ring-1 ring-slate-900/15">
+        <span className="absolute right-4 top-4 rounded-full bg-ink/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-ink/80 ring-1 ring-ink/15">
           ★ En cabeza
         </span>
       )}
@@ -50,7 +50,7 @@ export default function CandidateCard({ p, rank, delay = 0 }: Props) {
           <h3 className="truncate font-serif text-xl font-bold leading-tight">
             {shortName(p.nombreCandidato)}
           </h3>
-          <p className="truncate text-xs font-medium uppercase tracking-wide text-slate-900/45">
+          <p className="truncate text-xs font-medium uppercase tracking-wide text-ink/45">
             {p.nombreAgrupacionPolitica}
           </p>
         </div>
@@ -64,19 +64,19 @@ export default function CandidateCard({ p, rank, delay = 0 }: Props) {
           >
             <AnimatedNumber value={p.porcentajeVotosValidos} decimals={2} suffix="%" />
           </div>
-          <div className="text-xs text-slate-900/45">votos válidos</div>
+          <div className="text-xs text-ink/45">votos válidos</div>
         </div>
         <div className="text-right">
-          <div className="text-lg font-bold tabular-nums text-slate-900/90">
+          <div className="text-lg font-bold tabular-nums text-ink/90">
             <AnimatedNumber value={p.totalVotosValidos} group />
           </div>
-          <div className="text-xs text-slate-900/45">
+          <div className="text-xs text-ink/45">
             {formatNumber(p.totalVotosValidos)} votos
           </div>
         </div>
       </div>
 
-      <p className="mt-4 text-xs text-slate-900/40">
+      <p className="mt-4 text-xs text-ink/40">
         Equivale al {p.porcentajeVotosEmitidos.toFixed(2)}% de los votos emitidos
         (incluye blancos y nulos)
       </p>

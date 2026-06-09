@@ -28,7 +28,7 @@ export default function HeadToHead({ participantes }: Props) {
       </div>
 
       <div className="relative">
-        <div className="relative flex h-10 w-full overflow-hidden rounded-sm ring-1 ring-slate-900/15">
+        <div className="relative flex h-10 w-full overflow-hidden rounded-sm ring-1 ring-ink/15">
           <motion.div
             className="h-full"
             style={{ background: sa.gradient }}
@@ -42,11 +42,11 @@ export default function HeadToHead({ participantes }: Props) {
             transition={{ type: "spring", stiffness: 80, damping: 18 }}
           />
           {/* Línea de mayoría (50%) */}
-          <div className="pointer-events-none absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-slate-900/85" />
+          <div className="pointer-events-none absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-ink/85" />
         </div>
         {/* Etiqueta de mayoría */}
         <div className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2">
-          <span className="eyebrow text-[10px] text-slate-900/45">Mayoría · 50%</span>
+          <span className="eyebrow text-[10px] text-ink/45">Mayoría · 50%</span>
         </div>
       </div>
 
@@ -58,18 +58,18 @@ export default function HeadToHead({ participantes }: Props) {
             borderColor: `${sa.color}40`,
           }}
         >
-          <span className="text-xs text-slate-900/55">Diferencia</span>
+          <span className="text-xs text-ink/55">Diferencia</span>
           <span
             className="text-xl font-extrabold tabular-nums sm:text-2xl"
             style={{ color: sa.color }}
           >
             {formatNumber(Math.abs(voteDiff))}
           </span>
-          <span className="text-xs text-slate-900/55">votos</span>
+          <span className="text-xs text-ink/55">votos</span>
         </div>
-        <p className="text-center text-xs text-slate-900/50">
+        <p className="text-center text-xs text-ink/50">
           Ventaja de{" "}
-          <span className="font-semibold text-slate-900/80">{leaderLastName}</span> ·{" "}
+          <span className="font-semibold text-ink/80">{leaderLastName}</span> ·{" "}
           <span className="font-semibold" style={{ color: sa.color }}>
             +{lead.toFixed(2)} pts
           </span>{" "}
@@ -109,10 +109,10 @@ function Label({
         >
           {p.porcentajeVotosValidos.toFixed(2)}%
         </div>
-        <div className="font-serif text-sm font-bold text-slate-900/85">
+        <div className="font-serif text-sm font-bold text-ink/85">
           {shortName(p.nombreCandidato)}
         </div>
-        <div className="text-[10px] uppercase tracking-wide text-slate-900/40">
+        <div className="text-[10px] uppercase tracking-wide text-ink/40">
           {p.nombreAgrupacionPolitica}
         </div>
       </div>

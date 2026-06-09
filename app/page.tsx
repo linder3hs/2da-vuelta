@@ -101,7 +101,7 @@ export default function Page() {
         </div>
       ) : null}
 
-      <footer className="mt-12 text-center text-xs text-slate-900/30">
+      <footer className="mt-12 text-center text-xs text-ink/30">
         Datos oficiales de la ONPE · Proyecto independiente sin afiliación. Los
         resultados son preliminares hasta el cómputo final.
       </footer>

@@ -36,7 +36,7 @@ export default function StatCard({
           className="h-2 w-2 rounded-full"
           style={{ background: accent, boxShadow: `0 0 10px ${accent}` }}
         />
-        <span className="text-xs font-medium uppercase tracking-wide text-slate-900/45">
+        <span className="text-xs font-medium uppercase tracking-wide text-ink/45">
           {label}
         </span>
       </div>
@@ -48,7 +48,7 @@ export default function StatCard({
           suffix={suffix}
         />
       </div>
-      {sub && <div className="mt-1 text-xs text-slate-900/45">{sub}</div>}
+      {sub && <div className="mt-1 text-xs text-ink/45">{sub}</div>}
     </motion.div>
   );
 }

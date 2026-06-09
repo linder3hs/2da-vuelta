@@ -35,7 +35,21 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${sans.variable} ${serif.variable}`}>
+    <html
+      lang="es"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${sans.variable} ${serif.variable}`}
+    >
+      <head>
+        <script
+          // Aplica el tema guardado antes del primer pintado (default: dark).
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:'dark';}catch(e){document.documentElement.dataset.theme='dark';}",
+          }}
+        />
+      </head>
       <body>
         <div className="app-backdrop" aria-hidden />
         {children}

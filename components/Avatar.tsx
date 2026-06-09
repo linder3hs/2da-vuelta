@@ -26,7 +26,7 @@ export default function Avatar({
 
   return (
     <div
-      className={`relative shrink-0 overflow-hidden rounded-2xl ring-1 ring-slate-900/15 ${className}`}
+      className={`relative shrink-0 overflow-hidden rounded-2xl ring-1 ring-ink/15 ${className}`}
       style={{ width: size, height: size, background: gradient }}
     >
       {/* iniciales de respaldo (siempre detrás) */}
