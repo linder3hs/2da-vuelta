@@ -31,7 +31,7 @@ export default function RefreshCountdown({ onRefresh, isValidating }: Props) {
   return (
     <button
       onClick={handle}
-      className="group inline-flex items-center gap-3 rounded-full bg-white/5 px-4 py-2 text-sm font-medium text-white/80 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white"
+      className="group inline-flex items-center gap-3 rounded-full bg-slate-900/5 px-4 py-2 text-sm font-medium text-slate-900/80 ring-1 ring-slate-900/10 transition hover:bg-slate-900/10 hover:text-slate-900"
       title="Actualizar ahora"
     >
       <span className="relative grid h-7 w-7 place-items-center">
@@ -65,7 +65,7 @@ export default function RefreshCountdown({ onRefresh, isValidating }: Props) {
         </svg>
         <span
           className={`absolute text-[10px] font-bold tabular-nums ${
-            isValidating ? "animate-pulse text-rose-300" : "text-white/70"
+            isValidating ? "animate-pulse text-rose-600" : "text-slate-900/70"
           }`}
         >
           {left}

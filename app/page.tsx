@@ -27,10 +27,10 @@ export default function Page() {
             exit={{ opacity: 0, height: 0 }}
             className="mt-6 overflow-hidden"
           >
-            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-5 py-4 text-sm text-amber-200">
+            <div className="rounded-2xl border border-amber-500/40 bg-amber-50 px-5 py-4 text-sm text-amber-800">
               <strong className="font-semibold">No se pudieron cargar los datos.</strong>{" "}
               {error.message}
-              <span className="block text-amber-200/70">
+              <span className="block text-amber-700/80">
                 La API de ONPE puede estar temporalmente no disponible.
                 Reintentando automáticamente…
               </span>
@@ -101,7 +101,7 @@ export default function Page() {
         </div>
       ) : null}
 
-      <footer className="mt-12 text-center text-xs text-white/30">
+      <footer className="mt-12 text-center text-xs text-slate-900/30">
         Datos oficiales de la ONPE · Proyecto independiente sin afiliación. Los
         resultados son preliminares hasta el cómputo final.
       </footer>

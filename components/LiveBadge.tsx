@@ -7,8 +7,8 @@ export default function LiveBadge({ live = true }: { live?: boolean }) {
     <span
       className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${
         live
-          ? "bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/30"
-          : "bg-white/5 text-white/50 ring-1 ring-white/10"
+          ? "bg-rose-500/10 text-rose-600 ring-1 ring-rose-500/30"
+          : "bg-slate-900/5 text-slate-900/50 ring-1 ring-slate-900/10"
       }`}
     >
       <span className="relative flex h-2 w-2">
@@ -21,7 +21,7 @@ export default function LiveBadge({ live = true }: { live?: boolean }) {
         )}
         <span
           className={`relative inline-flex h-2 w-2 rounded-full ${
-            live ? "bg-rose-400" : "bg-white/30"
+            live ? "bg-rose-400" : "bg-slate-900/30"
           }`}
         />
       </span>

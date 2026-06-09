@@ -22,24 +22,24 @@ export default function ProcessHeader({ totales, live, onRefresh }: Props) {
       {/* Antetítulo / kicker */}
       <div className="mb-3 flex items-center gap-3">
         <span className="eyebrow">Perú 2026 · Resultados oficiales ONPE</span>
-        <span className="h-px flex-1 bg-white/10" />
+        <span className="h-px flex-1 bg-slate-900/10" />
         <LiveBadge live={live} />
       </div>
 
       {/* Titular serif */}
-      <h1 className="font-serif text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl">
+      <h1 className="font-serif text-4xl font-black leading-[1.05] tracking-tight text-slate-900 sm:text-6xl">
         2da Vuelta de Elecciones Presidenciales 2026
       </h1>
 
       {/* Línea de crédito / dateline */}
-      <div className="mt-4 flex flex-col gap-3 border-t border-white/10 pt-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-white/55">
+      <div className="mt-4 flex flex-col gap-3 border-t border-slate-900/10 pt-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm text-slate-900/55">
           Cómputo oficial en tiempo real · Fuente:{" "}
-          <span className="font-semibold text-white/80">ONPE</span>
+          <span className="font-semibold text-slate-900/80">ONPE</span>
           {totales?.fechaActualizacion && (
             <>
               {" · "}Actualizado{" "}
-              <span className="font-semibold text-white/80">
+              <span className="font-semibold text-slate-900/80">
                 {formatDateTime(totales.fechaActualizacion)}
               </span>
             </>

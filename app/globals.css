@@ -4,10 +4,11 @@
   --font-sans: var(--font-sans-editorial), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-serif-editorial), ui-serif, Georgia, serif;
 
-  --color-bg: #0a0f1a;
-  --color-bg-soft: #0f1626;
-  --color-ink: #eef1f6;
-  --color-muted: #93a0b5;
+  /* Tema claro */
+  --color-bg: #f4f5f7;
+  --color-bg-soft: #ffffff;
+  --color-ink: #0f172a;
+  --color-muted: #5b677b;
 
   /* Acento institucional sobrio */
   --color-brand: #2563eb;
@@ -15,12 +16,12 @@
   --color-accent: #475569;
 
   /* Party colors */
-  --color-fp: #f97316; /* Fuerza Popular - naranja */
-  --color-jp: #16a34a; /* Juntos por el Perú - verde */
+  --color-fp: #ea580c; /* Fuerza Popular - naranja */
+  --color-jp: #15803d; /* Juntos por el Perú - verde */
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
@@ -32,15 +33,15 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Sober institutional backdrop (estático, sutil) */
+/* Backdrop claro, sobrio */
 .app-backdrop {
   position: fixed;
   inset: 0;
   z-index: -1;
   overflow: hidden;
   background:
-    radial-gradient(70% 55% at 50% -10%, rgba(37, 99, 235, 0.10), transparent 60%),
-    linear-gradient(180deg, #0c1322 0%, var(--color-bg) 55%);
+    radial-gradient(70% 55% at 50% -10%, rgba(37, 99, 235, 0.07), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, var(--color-bg) 55%);
 }
 
 /* Línea fina superior tipo cabecera institucional */
@@ -51,17 +52,14 @@ body {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-fp), #e2e8f0 50%, var(--color-jp));
-  opacity: 0.85;
+  background: linear-gradient(90deg, var(--color-fp), #cbd5e1 50%, var(--color-jp));
 }
 
-/* Glassmorphism — más sobrio y limpio */
+/* Tarjeta (antes "glass"): superficie blanca con borde y sombra suave */
 .glass {
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px) saturate(115%);
-  -webkit-backdrop-filter: blur(14px) saturate(115%);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.30);
+  background: var(--color-bg-soft);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
 }
 
 .text-gradient {
@@ -90,8 +88,8 @@ body {
   width: 100%;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.04)
+    rgba(15, 23, 42, 0.16),
+    rgba(15, 23, 42, 0.04)
   );
 }
 
@@ -116,5 +114,5 @@ body {
 /* Thin scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  scrollbar-color: rgba(15, 23, 42, 0.2) transparent;
 }
