@@ -25,7 +25,7 @@ export function CompactProgress({ t }: { t: Totales }) {
           />
         </div>
         <span className="figure shrink-0 text-xl font-black text-blue-500 tabular-nums">
-          {t.actasContabilizadas.toFixed(2)}%
+          {t.actasContabilizadas.toFixed(3)}%
         </span>
       </div>
     </div>
@@ -37,7 +37,7 @@ export default function Indicators({ t }: { t: Totales }) {
   const items = [
     {
       label: "Participación",
-      value: `${t.participacionCiudadana.toFixed(2)}%`,
+      value: `${t.participacionCiudadana.toFixed(3)}%`,
       sub: "ciudadana",
     },
     {
@@ -47,12 +47,12 @@ export default function Indicators({ t }: { t: Totales }) {
     },
     {
       label: "Actas enviadas a JEE",
-      value: `${t.actasEnviadasJee.toFixed(2)}%`,
+      value: `${t.actasEnviadasJee.toFixed(3)}%`,
       sub: `${formatNumber(t.enviadasJee)} actas`,
     },
     {
       label: "Actas pendientes JEE",
-      value: `${t.actasPendientesJee.toFixed(2)}%`,
+      value: `${t.actasPendientesJee.toFixed(3)}%`,
       sub: `${formatNumber(t.pendientesJee)} actas`,
     },
   ];

@@ -68,7 +68,7 @@ export default function ResultHero({ p }: { p: Participante[] }) {
           </span>{" "}
           ·{" "}
           <span className="font-bold" style={{ color: sa.color }}>
-            +{lead.toFixed(2)} pts
+            +{lead.toFixed(3)} pts
           </span>
         </span>
       </div>
@@ -121,7 +121,7 @@ function Candidate({
             className="figure text-4xl font-black sm:text-5xl"
             style={{ color: s.color }}
           >
-            {p.porcentajeVotosValidos.toFixed(2)}%
+            {p.porcentajeVotosValidos.toFixed(3)}%
           </span>
           <span className="text-xs text-ink/45">
             {formatNumber(p.totalVotosValidos)} votos

@@ -46,10 +46,10 @@ export default function ResultsTable({ p }: { p: Participante[] }) {
               className="figure text-right text-lg font-black tabular-nums"
               style={{ color: s.color }}
             >
-              {c.porcentajeVotosValidos.toFixed(2)}%
+              {c.porcentajeVotosValidos.toFixed(3)}%
             </div>
             <div className="hidden text-right text-sm tabular-nums text-ink/55 sm:block">
-              {c.porcentajeVotosEmitidos.toFixed(2)}%
+              {c.porcentajeVotosEmitidos.toFixed(3)}%
             </div>
           </div>
         );
