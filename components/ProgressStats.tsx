@@ -7,9 +7,6 @@ import { formatNumber } from "@/lib/format";
 /** Tira compacta de avance del conteo (una línea + barra fina). */
 export function CompactProgress({ t }: { t: Totales }) {
   const actasRestantes = Math.max(0, t.totalActas - t.contabilizadas);
-  const avgPorActa =
-    t.contabilizadas > 0 ? t.totalVotosEmitidos / t.contabilizadas : 0;
-  const votosPorContar = Math.round(actasRestantes * avgPorActa);
 
   return (
     <div className="glass rounded-2xl px-5 py-4">
@@ -39,14 +36,7 @@ export function CompactProgress({ t }: { t: Totales }) {
           <span className="font-semibold text-ink/70">
             {formatNumber(actasRestantes)}
           </span>{" "}
-          actas ·{" "}
-          <span className="font-semibold text-ink/70">
-            ≈ {formatNumber(votosPorContar)}
-          </span>{" "}
-          votos por contar{" "}
-          <span className="text-ink/35">
-            (estimado, ~{Math.round(avgPorActa)} votos/acta)
-          </span>
+          actas por contabilizar
         </p>
       )}
     </div>
